@@ -1,0 +1,62 @@
+name: User story
+description: 사용자 가치와 인수 조건이 있는 기능 작업
+title: "[Feature] "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        요구사항 ID와 사용자 가치를 먼저 연결해 주세요.
+  - type: input
+    id: requirement
+    attributes:
+      label: Requirement IDs
+      description: 예) FR-CAT-02, NFR-A11Y-01
+      placeholder: FR-...
+    validations:
+      required: true
+  - type: textarea
+    id: story
+    attributes:
+      label: User story
+      description: 누구로서, 무엇을, 왜 원하는지 작성합니다.
+      placeholder: "Guest로서 ...하고 싶다. 그래야 ...할 수 있다."
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Given / When / Then으로 검증 가능한 조건을 작성합니다.
+      placeholder: |
+        - Given ...
+          When ...
+          Then ...
+    validations:
+      required: true
+  - type: textarea
+    id: edge_cases
+    attributes:
+      label: Edge cases
+      description: 로딩, 빈 상태, 오류, 권한, 모바일 상황을 적습니다.
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0 — MVP 필수
+        - P1 — MVP 이후 개선
+        - P2 — 확장 후보
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Definition of done
+      value: |
+        - [ ] 구현 및 자체 검토
+        - [ ] 관련 테스트 추가
+        - [ ] 접근성·반응형 확인
+        - [ ] 문서 갱신
+        - [ ] PR에 화면과 테스트 결과 첨부

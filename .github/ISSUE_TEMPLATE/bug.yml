@@ -1,0 +1,44 @@
+name: Bug report
+description: 재현 가능한 문제와 기대 결과를 기록
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: 무엇이 잘못되었는지 설명합니다.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. ...로 이동
+        2. ...을 선택
+        3. ... 오류 확인
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and environment
+      description: 스크린샷, 로그의 오류 추적 ID, 브라우저와 기기 정보를 남깁니다. 개인정보와 비밀 값은 제거합니다.
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - Blocker — 핵심 흐름 진행 불가
+        - Major — 주요 기능 오류
+        - Minor — 우회 가능하거나 시각적 오류
+    validations:
+      required: true
