@@ -24,20 +24,20 @@
 | 11 | 찜과 편집 컬렉션 | P1 | MY EDIT, STORIES | FR-WISH-01, FR-CAT-07 |
 | 12 | 주문 취소 | P1 | 취소와 재고 복구 | FR-ORDER-07 |
 
-## GitHub Issue 초안
+## GitHub Issue 백로그
 
-아래 제목을 실제 GitHub Issue의 첫 백로그로 사용합니다.
+2단계에서 아래 P0 작업을 실제 GitHub Issue로 등록했습니다.
 
-1. `[Foundation] Initialize storefront and quality gates`
-2. `[Catalog] Implement product list and detail vertical slice`
-3. `[Discovery] Add URL-based search, filters, and sorting`
-4. `[Auth] Implement member authentication and role authorization`
-5. `[Cart] Build persistent cart with server revalidation`
-6. `[Checkout] Create idempotent test order and stock transaction`
-7. `[Orders] Add member order history and detail`
-8. `[Admin] Manage products, variants, and inventory`
-9. `[Admin] Manage order status with transition rules`
-10. `[Quality] Audit accessibility, performance, security, and E2E flow`
+1. [#1 Foundation — Initialize storefront and quality gates](https://github.com/codingIQ2/seamory-commerce/issues/1)
+2. [#2 Catalog — Implement product list and detail vertical slice](https://github.com/codingIQ2/seamory-commerce/issues/2)
+3. [#3 Discovery — Add URL-based search, filters, and sorting](https://github.com/codingIQ2/seamory-commerce/issues/3)
+4. [#4 Auth — Implement member authentication and role authorization](https://github.com/codingIQ2/seamory-commerce/issues/4)
+5. [#5 Cart — Build persistent cart with server revalidation](https://github.com/codingIQ2/seamory-commerce/issues/5)
+6. [#6 Checkout — Create idempotent test order and stock transaction](https://github.com/codingIQ2/seamory-commerce/issues/6)
+7. [#7 Orders — Add member order history and detail](https://github.com/codingIQ2/seamory-commerce/issues/7)
+8. [#8 Admin — Manage products, variants, and inventory](https://github.com/codingIQ2/seamory-commerce/issues/8)
+9. [#9 Admin — Manage order status with transition rules](https://github.com/codingIQ2/seamory-commerce/issues/9)
+10. [#10 Quality — Audit accessibility, performance, security, and E2E flow](https://github.com/codingIQ2/seamory-commerce/issues/10)
 
 ## 착수 조건
 

@@ -49,6 +49,7 @@ HUKUPUKU는 편집숍형 큐레이션과 명확한 상품 정보를 결합하고
 - [사용자 시나리오와 인수 조건](docs/06-user-scenarios.md)
 - [핵심 도메인 규칙](docs/07-domain-rules.md)
 - [MVP 백로그](docs/08-mvp-backlog.md)
+- [GitHub Issues](https://github.com/codingIQ2/seamory-commerce/issues)
 - [개발 방식](CONTRIBUTING.md)
 - [변경 기록](CHANGELOG.md)
 
