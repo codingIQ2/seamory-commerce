@@ -10,7 +10,7 @@ HUKUPUKU는 다양한 브랜드와 상품을 발견하고, 비교하고, 자신�
 | --- | --- |
 | 프로젝트 유형 | 개인 풀스택 포트폴리오 |
 | 역할 | 기획, UX/UI, 프론트엔드, 백엔드, 테스트, 배포 |
-| 현재 단계 | 4단계 완료 — 와이어프레임·디자인 시스템 정의 |
+| 현재 단계 | 5단계 완료 — 기술 아키텍처·데이터 모델 정의 |
 | 핵심 사용자 | 여러 브랜드를 한곳에서 비교하고 취향에 맞는 상품을 찾고 싶은 사용자 |
 | 핵심 가치 | 발견의 즐거움, 빠른 비교, 신뢰할 수 있는 구매 경험 |
 
@@ -53,6 +53,9 @@ HUKUPUKU는 편집숍형 큐레이션과 명확한 상품 정보를 결합하고
 - [화면 목록과 책임](docs/10-screen-inventory.md)
 - [핵심 화면 와이어프레임](docs/11-wireframes.md)
 - [HUKUPUKU 디자인 시스템](docs/12-design-system.md)
+- [기술 아키텍처](docs/13-technical-architecture.md)
+- [데이터 모델과 무결성 규칙](docs/14-data-model.md)
+- [기술 결정 기록](docs/15-architecture-decisions.md)
 - [GitHub Issues](https://github.com/codingIQ2/seamory-commerce/issues)
 - [개발 방식](CONTRIBUTING.md)
 - [변경 기록](CHANGELOG.md)
@@ -63,16 +66,16 @@ HUKUPUKU는 편집숍형 큐레이션과 명확한 상품 정보를 결합하고
 - [x] 2. 요구사항과 사용자 시나리오
 - [x] 3. 정보 구조와 화면 목록
 - [x] 4. 와이어프레임과 디자인 시스템
-- [ ] 5. 기술 설계와 데이터 모델
+- [x] 5. 기술 설계와 데이터 모델
 - [ ] 6. 프로젝트 초기화와 자동화
 - [ ] 7. 고객용 MVP 구현
 - [ ] 8. 관리자 기능 구현
 - [ ] 9. 테스트, 보안, 성능 개선
 - [ ] 10. 배포와 포트폴리오 정리
 
-## 예정 기술 스택
+## 확정 기술 스택
 
-TypeScript, Next.js, Tailwind CSS, PostgreSQL, Prisma, 인증 시스템, Vitest, Playwright, GitHub Actions, Vercel을 우선 검토합니다. 기술은 5단계 설계에서 요구사항과 비용을 비교한 뒤 확정합니다.
+Node.js 24 LTS, TypeScript, Next.js 16 App Router, React 19, Tailwind CSS 4, PostgreSQL, Prisma ORM 7, Better Auth, Vitest, Playwright, GitHub Actions, Vercel과 Neon을 사용합니다. 정확한 패치 버전은 6단계에서 lockfile로 고정합니다.
 
 ## 포트폴리오 기록 원칙
 
