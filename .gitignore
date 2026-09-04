@@ -10,6 +10,7 @@ dist/
 coverage/
 playwright-report/
 test-results/
+blob-report/
 
 # environment variables
 .env
@@ -27,3 +28,12 @@ Thumbs.db
 
 # deployment
 .vercel/
+
+# generated clients
+src/generated/prisma/
+
+# generated Next.js declarations
+next-env.d.ts
+*.tsbuildinfo
+
+/src/generated/prisma

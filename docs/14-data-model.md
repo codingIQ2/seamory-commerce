@@ -449,10 +449,10 @@ Admin 권한 확인
 
 ## 구현 전 확인 목록
 
-- [ ] Better Auth가 생성한 schema와 User 도메인 필드를 충돌 없이 병합
-- [ ] 모든 unique, check, FK onDelete 정책을 migration SQL에서 검토
-- [ ] 금액 필드를 정수로 생성하고 음수 check 추가
-- [ ] 기본 배송지 partial unique index 추가
-- [ ] 주문 멱등성 unique와 재고 movement unique 추가
+- [x] Better Auth 1.7.2 core schema와 User 도메인 필드를 충돌 없이 병합
+- [x] 모든 unique, check, FK onDelete 정책을 초기 migration SQL에서 검토
+- [x] 금액 필드를 정수로 생성하고 음수 check 추가
+- [x] 기본 배송지 partial unique index 추가
+- [x] 주문 멱등성 unique와 재고 movement unique 추가
 - [ ] 주문 생성·취소·관리자 재고 조정 integration test 먼저 작성
 - [ ] Preview와 Production DB 및 migration 권한 분리

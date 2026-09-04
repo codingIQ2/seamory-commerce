@@ -10,7 +10,7 @@ HUKUPUKU는 다양한 브랜드와 상품을 발견하고, 비교하고, 자신�
 | --- | --- |
 | 프로젝트 유형 | 개인 풀스택 포트폴리오 |
 | 역할 | 기획, UX/UI, 프론트엔드, 백엔드, 테스트, 배포 |
-| 현재 단계 | 5단계 완료 — 기술 아키텍처·데이터 모델 정의 |
+| 현재 단계 | 6단계 완료 — 실행 가능한 웹 기반·DB 스키마·CI 자동화 |
 | 핵심 사용자 | 여러 브랜드를 한곳에서 비교하고 취향에 맞는 상품을 찾고 싶은 사용자 |
 | 핵심 가치 | 발견의 즐거움, 빠른 비교, 신뢰할 수 있는 구매 경험 |
 
@@ -56,6 +56,7 @@ HUKUPUKU는 편집숍형 큐레이션과 명확한 상품 정보를 결합하고
 - [기술 아키텍처](docs/13-technical-architecture.md)
 - [데이터 모델과 무결성 규칙](docs/14-data-model.md)
 - [기술 결정 기록](docs/15-architecture-decisions.md)
+- [개발 환경과 자동화](docs/16-development-setup.md)
 - [GitHub Issues](https://github.com/codingIQ2/seamory-commerce/issues)
 - [개발 방식](CONTRIBUTING.md)
 - [변경 기록](CHANGELOG.md)
@@ -67,7 +68,7 @@ HUKUPUKU는 편집숍형 큐레이션과 명확한 상품 정보를 결합하고
 - [x] 3. 정보 구조와 화면 목록
 - [x] 4. 와이어프레임과 디자인 시스템
 - [x] 5. 기술 설계와 데이터 모델
-- [ ] 6. 프로젝트 초기화와 자동화
+- [x] 6. 프로젝트 초기화와 자동화
 - [ ] 7. 고객용 MVP 구현
 - [ ] 8. 관리자 기능 구현
 - [ ] 9. 테스트, 보안, 성능 개선
@@ -75,7 +76,27 @@ HUKUPUKU는 편집숍형 큐레이션과 명확한 상품 정보를 결합하고
 
 ## 확정 기술 스택
 
-Node.js 24 LTS, TypeScript, Next.js 16 App Router, React 19, Tailwind CSS 4, PostgreSQL, Prisma ORM 7, Better Auth, Vitest, Playwright, GitHub Actions, Vercel과 Neon을 사용합니다. 정확한 패치 버전은 6단계에서 lockfile로 고정합니다.
+Node.js 24 LTS, TypeScript, Next.js 16.3.3 App Router, React 19.2.8, Tailwind CSS 4, PostgreSQL, Prisma ORM 7.10.0, Better Auth 1.7.2, Vitest, Playwright, GitHub Actions, Vercel과 Neon을 사용합니다. 재현 가능한 설치 버전은 `pnpm-lock.yaml`로 고정합니다.
+
+## 로컬에서 실행하기
+
+처음 한 번은 [Node.js 24 LTS](https://nodejs.org/)를 설치한 뒤 PowerShell에서 아래 명령을 실행합니다.
+
+```powershell
+npm install -g pnpm@11.19.0
+Copy-Item .env.example .env
+pnpm install
+pnpm db:generate
+pnpm dev
+```
+
+브라우저에서 `http://localhost:3000`을 열면 HUKUPUKU 홈 프리뷰를 볼 수 있습니다. 현재 홈은 DB 없이 실행되며, PostgreSQL 연결과 실제 상품 데이터는 7단계에서 연결합니다.
+
+전체 품질 검사는 다음 한 줄로 실행합니다.
+
+```powershell
+pnpm check
+```
 
 ## 포트폴리오 기록 원칙
 

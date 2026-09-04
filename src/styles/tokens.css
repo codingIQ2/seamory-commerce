@@ -1,0 +1,53 @@
+:root {
+  --color-ink: #171717;
+  --color-paper: #f5f2ec;
+  --color-surface: #fffdf9;
+  --color-muted: #66625c;
+  --color-mist: #dde1e6;
+  --color-signal: #b8322c;
+  --color-cobalt: #2447c6;
+  --color-success: #247a4b;
+  --color-warning: #8a5a00;
+  --color-white: #ffffff;
+  --color-text: var(--color-ink);
+  --color-background: var(--color-paper);
+  --color-action: var(--color-ink);
+  --color-error: var(--color-signal);
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 3rem;
+  --text-hero: 4.5rem;
+  --radius-sm: 0.25rem;
+  --radius-pill: 999px;
+  --layout-max: 90rem;
+  --layout-reading: 45rem;
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+  --motion-slow: 320ms;
+  --motion-ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@theme inline {
+  --color-brand-ink: var(--color-ink);
+  --color-brand-paper: var(--color-paper);
+  --color-brand-surface: var(--color-surface);
+  --color-brand-muted: var(--color-muted);
+  --color-brand-mist: var(--color-mist);
+  --color-brand-signal: var(--color-signal);
+  --color-brand-cobalt: var(--color-cobalt);
+  --font-sans: "Pretendard Variable", Pretendard, Inter, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+}

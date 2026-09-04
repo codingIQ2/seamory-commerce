@@ -25,3 +25,9 @@
 - PostgreSQL ERD와 인증·카탈로그·장바구니·주문·재고의 제약조건·인덱스·트랜잭션
 - 기술 선택의 맥락과 비용을 보존하는 ADR 10개
 - 사용자 스토리, 버그, Pull Request 템플릿
+- Next.js 16.3.3, React 19, TypeScript strict, Tailwind CSS 4 프로젝트 기반과 잠금 파일
+- 디자인 토큰을 반영한 반응형 HUKUPUKU 홈 프리뷰와 접근 가능한 고객 셸
+- Better Auth 기본 테이블과 커머스 도메인을 포함한 Prisma 7 PostgreSQL 스키마
+- 금액·수량·재고·주문 불변식을 보호하는 초기 migration 제약조건과 인덱스
+- Vitest 단위 테스트, Playwright 홈 smoke test, GitHub Actions 품질·E2E 파이프라인
+- 환경 변수, 로컬 실행, 폴더 구조와 자동 검사 명령을 설명하는 개발 환경 문서
