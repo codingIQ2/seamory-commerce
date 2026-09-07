@@ -1,71 +1,55 @@
+import { Menu, Search, ShoppingBag, UserRound } from "lucide-react";
 import Link from "next/link";
-import { Heart, Menu, Search, ShoppingBag, UserRound } from "lucide-react";
 
-const pendingTitle = "7단계 고객 기능에서 연결됩니다";
+import { SignOutButton } from "@/features/auth/ui/sign-out-button";
+import { getCartForDisplay } from "@/features/cart/data/cart-repository";
+import { getCurrentSession } from "@/server/auth/session";
 
-export function StoreHeader() {
+export async function StoreHeader() {
+  const [session, cart] = await Promise.all([getCurrentSession(), getCartForDisplay()]);
+  const cartCount = cart?.items.reduce((sum, item) => sum + item.quantity, 0) ?? 0;
+
   return (
     <>
       <a className="skip-link" href="#main-content">
         본문으로 바로가기
       </a>
-      <div className="announcement">PORTFOLIO PREVIEW · 결제와 배송은 실제 서비스가 아닙니다</div>
+      <div className="announcement">
+        PORTFOLIO TEST STORE · 모든 주문은 실제 결제 없이 생성됩니다
+      </div>
       <header className="store-header">
         <div className="header-inner">
-          <button
-            aria-label="메뉴 — 다음 단계에서 제공"
-            className="icon-button mobile-menu"
-            disabled
-            title={pendingTitle}
-            type="button"
-          >
-            <Menu aria-hidden="true" size={22} strokeWidth={2} />
-          </button>
-          <Link className="wordmark" href="/" aria-label="HUKUPUKU 홈">
+          <Link aria-label="상품 목록" className="icon-button mobile-menu" href="/products">
+            <Menu aria-hidden="true" size={22} />
+          </Link>
+          <Link aria-label="HUKUPUKU 홈" className="wordmark" href="/">
             HUKUPUKU
           </Link>
           <nav className="main-nav" aria-label="주요 메뉴">
-            <a href="#new">NEW</a>
-            <a href="#edit">EDIT</a>
-            <a href="#journal">JOURNAL</a>
+            <Link href="/products">SHOP</Link>
+            <Link href="/products?sort=newest">NEW</Link>
+            <Link href="/#edit">EDITORIAL</Link>
           </nav>
           <div className="header-actions" aria-label="사용자 메뉴">
-            <button
-              aria-label="검색 — 다음 단계에서 제공"
-              className="icon-button search-action"
-              disabled
-              title={pendingTitle}
-              type="button"
-            >
+            <Link aria-label="상품 검색" className="icon-button search-action" href="/products">
               <Search aria-hidden="true" size={20} />
-            </button>
-            <button
-              aria-label="찜 — 다음 단계에서 제공"
-              className="icon-button wishlist-action"
-              disabled
-              title={pendingTitle}
-              type="button"
-            >
-              <Heart aria-hidden="true" size={20} />
-            </button>
-            <button
-              aria-label="계정 — 다음 단계에서 제공"
+            </Link>
+            <Link
+              aria-label={session ? "주문 내역" : "로그인"}
               className="icon-button account-action"
-              disabled
-              title={pendingTitle}
-              type="button"
+              href={session ? "/account/orders" : "/login"}
             >
               <UserRound aria-hidden="true" size={20} />
-            </button>
-            <button
-              aria-label="장바구니 — 다음 단계에서 제공"
-              className="icon-button"
-              disabled
-              title={pendingTitle}
-              type="button"
+            </Link>
+            <Link
+              aria-label={`장바구니 상품 ${cartCount}개`}
+              className="icon-button cart-action"
+              href="/cart"
             >
               <ShoppingBag aria-hidden="true" size={20} />
-            </button>
+              {cartCount > 0 ? <span className="cart-count">{cartCount}</span> : null}
+            </Link>
+            {session ? <SignOutButton /> : null}
           </div>
         </div>
       </header>

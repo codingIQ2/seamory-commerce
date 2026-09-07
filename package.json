@@ -16,8 +16,12 @@
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "db:generate": "prisma generate",
+    "db:dev": "node scripts/prisma-dev.mjs",
+    "db:dev:stop": "node scripts/prisma-dev.mjs stop hukupuku",
+    "db:create": "node scripts/create-dev-db.mjs",
     "db:validate": "prisma validate",
     "db:migrate": "prisma migrate dev",
+    "db:seed": "tsx prisma/seed.ts",
     "db:studio": "prisma studio",
     "check": "pnpm format:check && pnpm db:validate && pnpm db:generate && pnpm lint && pnpm typecheck && pnpm test && pnpm build"
   },
@@ -35,6 +39,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
+    "@prisma/cli-dev": "^0.16.28",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/pg": "^8.23.1",
@@ -48,6 +53,7 @@
     "prettier-plugin-tailwindcss": "^0.8.1",
     "prisma": "^7.10.0",
     "tailwindcss": "^4",
+    "tsx": "^4.23.13",
     "typescript": "^5",
     "vitest": "^4.1.11"
   },

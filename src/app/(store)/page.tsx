@@ -1,9 +1,13 @@
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
-import { previewProducts } from "@/features/catalog/data/preview-products";
+import { getFeaturedProducts } from "@/features/catalog/data/catalog-repository";
 import { ProductCard } from "@/features/catalog/ui/product-card";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const products = await getFeaturedProducts();
   return (
     <main id="main-content">
       <section className="content-width hero" aria-labelledby="hero-title">
@@ -19,10 +23,10 @@ export default function HomePage() {
               계절을 건너 남는 소재와 실루엣. 네 개의 가상 디자이너 브랜드를 HUKUPUKU의 시선으로
               골랐습니다.
             </p>
-            <a className="editorial-link" href="#new">
-              이번 주 셀렉션 보기
+            <Link className="editorial-link" href="/products">
+              전체 셀렉션 보기
               <ArrowUpRight aria-hidden="true" size={18} />
-            </a>
+            </Link>
           </div>
         </div>
         <div className="hero-art" aria-hidden="true">
@@ -37,12 +41,12 @@ export default function HomePage() {
             <h2 className="section-title">이번 주 새로 고른 것</h2>
           </div>
           <p className="section-note">
-            지금은 프로젝트 기반을 보여주는 프리뷰입니다. 실제 상품 이미지, 검색과 상세 구매 흐름은
-            7단계에서 데이터와 연결합니다.
+            실제 재고와 가격이 연결된 첫 번째 셀렉션입니다. 옵션을 고르고 장바구니와 테스트 주문까지
+            직접 경험해 보세요.
           </p>
         </div>
         <div className="product-grid">
-          {previewProducts.map((product, index) => (
+          {products.map((product, index) => (
             <ProductCard key={product.id} product={product} index={index} />
           ))}
         </div>
@@ -75,12 +79,12 @@ export default function HomePage() {
 
       <section className="content-width section" id="stage-status">
         <div className="stage-status">
-          <span className="stage-number">06 / 10</span>
+          <span className="stage-number">07 / 10</span>
           <div>
-            <strong>프로젝트 기반과 자동화 준비</strong>
-            <p>Next.js, TypeScript, Prisma, 테스트와 CI가 같은 기준으로 동작합니다.</p>
+            <strong>고객 구매 여정 구현</strong>
+            <p>상품 탐색부터 로그인, 장바구니, 테스트 주문과 주문 조회까지 연결했습니다.</p>
           </div>
-          <span className="status-pill">FOUNDATION READY</span>
+          <span className="status-pill">CUSTOMER FLOW READY</span>
         </div>
       </section>
     </main>

@@ -10,7 +10,7 @@ HUKUPUKU는 다양한 브랜드와 상품을 발견하고, 비교하고, 자신�
 | --- | --- |
 | 프로젝트 유형 | 개인 풀스택 포트폴리오 |
 | 역할 | 기획, UX/UI, 프론트엔드, 백엔드, 테스트, 배포 |
-| 현재 단계 | 6단계 완료 — 실행 가능한 웹 기반·DB 스키마·CI 자동화 |
+| 현재 단계 | 7단계 완료 — 고객 상품 탐색·인증·장바구니·테스트 주문 |
 | 핵심 사용자 | 여러 브랜드를 한곳에서 비교하고 취향에 맞는 상품을 찾고 싶은 사용자 |
 | 핵심 가치 | 발견의 즐거움, 빠른 비교, 신뢰할 수 있는 구매 경험 |
 
@@ -57,6 +57,7 @@ HUKUPUKU는 편집숍형 큐레이션과 명확한 상품 정보를 결합하고
 - [데이터 모델과 무결성 규칙](docs/14-data-model.md)
 - [기술 결정 기록](docs/15-architecture-decisions.md)
 - [개발 환경과 자동화](docs/16-development-setup.md)
+- [7단계 고객 구매 흐름](docs/17-customer-mvp.md)
 - [GitHub Issues](https://github.com/codingIQ2/seamory-commerce/issues)
 - [개발 방식](CONTRIBUTING.md)
 - [변경 기록](CHANGELOG.md)
@@ -69,7 +70,7 @@ HUKUPUKU는 편집숍형 큐레이션과 명확한 상품 정보를 결합하고
 - [x] 4. 와이어프레임과 디자인 시스템
 - [x] 5. 기술 설계와 데이터 모델
 - [x] 6. 프로젝트 초기화와 자동화
-- [ ] 7. 고객용 MVP 구현
+- [x] 7. 고객용 MVP 구현
 - [ ] 8. 관리자 기능 구현
 - [ ] 9. 테스트, 보안, 성능 개선
 - [ ] 10. 배포와 포트폴리오 정리
@@ -86,11 +87,15 @@ Node.js 24 LTS, TypeScript, Next.js 16.3.3 App Router, React 19.2.8, Tailwind CS
 npm install -g pnpm@11.19.0
 Copy-Item .env.example .env
 pnpm install
+pnpm db:dev --detach --name hukupuku
+pnpm db:create
+pnpm prisma migrate deploy
 pnpm db:generate
+pnpm db:seed
 pnpm dev
 ```
 
-브라우저에서 `http://localhost:3000`을 열면 HUKUPUKU 홈 프리뷰를 볼 수 있습니다. 현재 홈은 DB 없이 실행되며, PostgreSQL 연결과 실제 상품 데이터는 7단계에서 연결합니다.
+브라우저에서 `http://localhost:3000`을 열면 실제 로컬 DB 상품으로 HUKUPUKU 고객 흐름을 체험할 수 있습니다. 결제는 카드 정보를 받지 않는 테스트 주문이며 실제 승인이나 배송은 발생하지 않습니다.
 
 전체 품질 검사는 다음 한 줄로 실행합니다.
 

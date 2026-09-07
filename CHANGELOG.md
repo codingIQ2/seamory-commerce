@@ -31,3 +31,11 @@
 - 금액·수량·재고·주문 불변식을 보호하는 초기 migration 제약조건과 인덱스
 - Vitest 단위 테스트, Playwright 홈 smoke test, GitHub Actions 품질·E2E 파이프라인
 - 환경 변수, 로컬 실행, 폴더 구조와 자동 검사 명령을 설명하는 개발 환경 문서
+- AI로 제작한 통일된 상품 화보 4종과 HUKUPUKU 소셜 공유 이미지
+- PostgreSQL 로컬 개발 서버, 반복 실행 가능한 seed 상품 8개와 옵션별 재고
+- URL 상태를 사용하는 검색·브랜드·카테고리·사이즈·가격·정렬 카탈로그
+- 상품 상세 옵션 선택과 품절 처리, 비회원 장바구니와 로그인 후 병합
+- Better Auth 이메일 회원가입·로그인·세션 보호
+- 가격·판매 상태·재고를 다시 확인하는 멱등 테스트 주문 트랜잭션
+- 본인만 조회할 수 있는 주문 완료·목록·상세 화면
+- PostgreSQL service와 migration·seed를 포함한 GitHub Actions E2E 기반

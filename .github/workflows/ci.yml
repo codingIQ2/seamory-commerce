@@ -10,6 +10,8 @@ permissions:
 
 env:
   DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/hukupuku_ci?schema=public
+  BETTER_AUTH_SECRET: hukupuku-ci-only-secret-at-least-32-characters
+  BETTER_AUTH_URL: http://127.0.0.1:3000
 
 jobs:
   quality:
@@ -46,6 +48,20 @@ jobs:
     needs: quality
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: hukupuku_ci
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d hukupuku_ci"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -60,5 +76,7 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
+      - name: Prepare test database
+        run: pnpm db:generate && pnpm prisma migrate deploy && pnpm db:seed
       - name: Run smoke test
         run: pnpm test:e2e
