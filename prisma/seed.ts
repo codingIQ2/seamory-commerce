@@ -1,8 +1,10 @@
 import "dotenv/config";
 
 import { PrismaPg } from "@prisma/adapter-pg";
+import { prismaAdapter } from "better-auth/adapters/prisma";
+import { betterAuth } from "better-auth";
 
-import { PrismaClient, ProductStatus } from "../src/generated/prisma/client";
+import { PrismaClient, ProductStatus, UserRole } from "../src/generated/prisma/client";
 
 const connectionString = process.env.DATABASE_URL;
 
@@ -11,6 +13,20 @@ if (!connectionString) {
 }
 
 const db = new PrismaClient({ adapter: new PrismaPg({ connectionString }) });
+
+const seedAuth = betterAuth({
+  appName: "HUKUPUKU Seed",
+  baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3000",
+  secret: process.env.BETTER_AUTH_SECRET ?? "hukupuku-seed-secret-at-least-32-characters",
+  database: prismaAdapter(db, { provider: "postgresql" }),
+  emailAndPassword: { enabled: true },
+  user: {
+    additionalFields: {
+      role: { type: ["MEMBER", "ADMIN"], required: false, defaultValue: "MEMBER", input: false },
+    },
+  },
+  advanced: { database: { generateId: "uuid", joins: true } },
+});
 
 const brands = [
   ["HUKUPUKU LAB", "hukupuku-lab", "도시의 움직임을 연구하는 HUKUPUKU 오리지널 라인"],
@@ -231,6 +247,25 @@ async function seed() {
         },
       });
     }
+  }
+
+  const adminEmail = process.env.ADMIN_SEED_EMAIL?.toLowerCase();
+  const adminPassword = process.env.ADMIN_SEED_PASSWORD;
+  if (adminEmail && adminPassword) {
+    const existingAdmin = await db.user.findUnique({ where: { email: adminEmail } });
+    let adminId = existingAdmin?.id;
+    if (!adminId) {
+      const result = await seedAuth.api.signUpEmail({
+        body: {
+          email: adminEmail,
+          password: adminPassword,
+          name: process.env.ADMIN_SEED_NAME ?? "HUKUPUKU Admin",
+        },
+      });
+      adminId = result.user.id;
+    }
+    await db.user.update({ where: { id: adminId }, data: { role: UserRole.ADMIN } });
+    console.log(`Prepared local admin: ${adminEmail}`);
   }
 }
 

@@ -45,6 +45,8 @@ pnpm db:seed
 
 `.env`는 Git에 올라가지 않습니다. `.env.example`에는 키 이름과 로컬 예시만 두며 실제 운영 비밀값을 기록하지 않습니다.
 
+8단계 관리자 화면을 로컬에서 확인하려면 `.env`의 `ADMIN_SEED_EMAIL`, `ADMIN_SEED_PASSWORD`, `ADMIN_SEED_NAME`을 개발용 값으로 바꾼 뒤 `pnpm db:seed`를 다시 실행합니다. 이 비밀번호는 로컬 테스트 전용이며 운영 비밀번호를 저장소에 기록하지 않습니다.
+
 ### 3. 개발 서버 실행
 
 ```powershell
@@ -68,7 +70,7 @@ pnpm dev
 | `pnpm db:dev --detach --name hukupuku` | 설치가 필요 없는 로컬 Prisma Postgres 시작 |
 | `pnpm db:create` | 로컬 서버에 HUKUPUKU 전용 DB 생성 |
 | `pnpm db:migrate` | 연결된 개발 DB에 migration 적용 |
-| `pnpm db:seed` | 브랜드·카테고리·상품·재고 샘플 입력 |
+| `pnpm db:seed` | 브랜드·카테고리·상품·재고 샘플과 선택적 로컬 관리자 입력 |
 | `pnpm check` | 커밋 전 전체 품질 검사 |
 
 Playwright를 로컬에서 처음 실행할 때는 브라우저 바이너리를 한 번 준비합니다.
