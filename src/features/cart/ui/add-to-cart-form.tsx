@@ -16,7 +16,7 @@ export function AddToCartForm({
 }) {
   const [state, action, pending] = useActionState(addToCartAction, initialState);
   return (
-    <form action={action} className="add-cart-form">
+    <form action={action} aria-busy={pending} className="add-cart-form">
       <fieldset disabled={!available || pending}>
         <legend>옵션 선택</legend>
         <div className="variant-grid">

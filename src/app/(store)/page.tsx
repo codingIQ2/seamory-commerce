@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
 export default async function HomePage() {
   const products = await getFeaturedProducts();
   return (
-    <main id="main-content">
+    <main id="main-content" tabIndex={-1}>
       <section className="content-width hero" aria-labelledby="hero-title">
         <div className="hero-copy">
           <p className="eyebrow">New threads — selection 01</p>
@@ -79,12 +79,12 @@ export default async function HomePage() {
 
       <section className="content-width section" id="stage-status">
         <div className="stage-status">
-          <span className="stage-number">07 / 10</span>
+          <span className="stage-number">09 / 10</span>
           <div>
-            <strong>고객 구매 여정 구현</strong>
-            <p>상품 탐색부터 로그인, 장바구니, 테스트 주문과 주문 조회까지 연결했습니다.</p>
+            <strong>서비스 품질 강화</strong>
+            <p>보안 헤더, 접근성 검사, 페이지네이션과 핵심 사용자 여정 테스트를 연결했습니다.</p>
           </div>
-          <span className="status-pill">CUSTOMER FLOW READY</span>
+          <span className="status-pill">QUALITY GATE READY</span>
         </div>
       </section>
     </main>

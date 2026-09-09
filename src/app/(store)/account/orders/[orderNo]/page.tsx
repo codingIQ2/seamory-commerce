@@ -13,7 +13,7 @@ export default async function OrderDetailPage({ params }: PageProps<"/account/or
   const order = await getOrderForUser(session.user.id, (await params).orderNo);
   if (!order) notFound();
   return (
-    <main className="content-width order-detail-page" id="main-content">
+    <main className="content-width order-detail-page" id="main-content" tabIndex={-1}>
       <header className="page-heading compact">
         <p className="eyebrow">Order detail</p>
         <h1>{order.orderNo}</h1>

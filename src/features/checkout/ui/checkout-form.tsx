@@ -14,7 +14,7 @@ export function CheckoutForm({
 }) {
   const [state, action, pending] = useActionState(placeOrderAction, { error: "" });
   return (
-    <form action={action} className="checkout-form">
+    <form action={action} aria-busy={pending} className="checkout-form">
       <input name="idempotencyKey" type="hidden" value={idempotencyKey} />
       <section className="checkout-panel">
         <p className="eyebrow">Shipping address</p>

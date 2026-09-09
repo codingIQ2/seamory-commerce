@@ -16,7 +16,7 @@ export default async function OrderCompletePage({
   const order = await getOrderForUser(session.user.id, (await params).orderNo);
   if (!order) notFound();
   return (
-    <main className="content-width complete-page" id="main-content">
+    <main className="content-width complete-page" id="main-content" tabIndex={-1}>
       <div className="complete-mark">
         <Check aria-hidden="true" />
       </div>

@@ -45,7 +45,7 @@ export function AuthForm({ mode, returnTo }: AuthFormProps) {
   }
 
   return (
-    <form className="auth-form" onSubmit={submit}>
+    <form aria-busy={pending} className="auth-form" onSubmit={submit}>
       {mode === "signup" ? (
         <label className="field">
           <span>이름</span>
@@ -60,12 +60,12 @@ export function AuthForm({ mode, returnTo }: AuthFormProps) {
         <span>비밀번호</span>
         <input
           autoComplete={mode === "signup" ? "new-password" : "current-password"}
-          minLength={8}
+          minLength={10}
           name="password"
           required
           type="password"
         />
-        {mode === "signup" ? <small>8자 이상 입력해 주세요.</small> : null}
+        {mode === "signup" ? <small>10자 이상 입력해 주세요.</small> : null}
       </label>
       {error ? (
         <p className="form-error" role="alert">

@@ -1,7 +1,9 @@
 import "server-only";
 
+import { cache } from "react";
 import { ProductStatus, Prisma } from "@/generated/prisma/client";
 import type { CatalogFilters } from "@/features/catalog/domain/catalog";
+import { catalogPageSize } from "@/features/catalog/domain/catalog";
 import { getDb } from "@/server/db/client";
 
 export type CatalogProduct = {
@@ -52,14 +54,29 @@ export async function getCatalogProducts(filters: CatalogFilters) {
       : {}),
   };
 
-  const orderBy: Prisma.ProductOrderByWithRelationInput =
+  const primaryOrder: Prisma.ProductOrderByWithRelationInput =
     filters.sort === "price-asc"
       ? { salePrice: "asc" }
       : filters.sort === "price-desc"
         ? { salePrice: "desc" }
         : { publishedAt: "desc" };
 
-  return getDb().product.findMany({ where, orderBy, select: cardSelect });
+  const [products, total] = await getDb().$transaction([
+    getDb().product.findMany({
+      where,
+      orderBy: [primaryOrder, { id: "asc" }],
+      skip: (filters.page - 1) * catalogPageSize,
+      take: catalogPageSize,
+      select: cardSelect,
+    }),
+    getDb().product.count({ where }),
+  ]);
+  return {
+    products,
+    total,
+    page: filters.page,
+    pageCount: Math.max(1, Math.ceil(total / catalogPageSize)),
+  };
 }
 
 export async function getFeaturedProducts(limit = 4) {
@@ -85,7 +102,7 @@ export async function getCatalogOptions() {
   return { brands, categories, sizes: sizes.map((item) => item.size) };
 }
 
-export async function getProductBySlug(slug: string) {
+export const getProductBySlug = cache(async (slug: string) => {
   return getDb().product.findFirst({
     where: { slug, status: ProductStatus.ACTIVE },
     include: {
@@ -95,4 +112,4 @@ export async function getProductBySlug(slug: string) {
       categories: { include: { category: true } },
     },
   });
-}
+});

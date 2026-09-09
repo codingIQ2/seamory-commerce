@@ -10,8 +10,8 @@ const imagePath = z
   .trim()
   .min(1, "대표 이미지 경로를 입력해 주세요.")
   .refine(
-    (value) => value.startsWith("/") || /^https:\/\//.test(value),
-    "이미지는 /로 시작하는 내부 경로 또는 https 주소여야 합니다.",
+    (value) => /^\/images\/products\/[A-Za-z0-9/_-]+\.(?:avif|webp|png|jpe?g)$/.test(value),
+    "이미지는 /images/products/ 아래의 안전한 이미지 경로여야 합니다.",
   );
 
 export const productFormSchema = z

@@ -21,7 +21,7 @@ export default async function CheckoutPage() {
     })),
   );
   return (
-    <main className="content-width checkout-page" id="main-content">
+    <main className="content-width checkout-page" id="main-content" tabIndex={-1}>
       <header className="page-heading compact">
         <p className="eyebrow">Secure test order</p>
         <h1>CHECKOUT</h1>

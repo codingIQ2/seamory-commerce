@@ -1,12 +1,41 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { AddToCartForm } from "@/features/cart/ui/add-to-cart-form";
 import { getProductBySlug } from "@/features/catalog/data/catalog-repository";
 import { calculateDiscountRate, formatKrw } from "@/lib/money";
+import { getPublicAppUrl } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/products/[slug]">): Promise<Metadata> {
+  const product = await getProductBySlug((await params).slug);
+  if (!product) return { title: "상품을 찾을 수 없습니다" };
+  const title = `${product.brand.name} ${product.name}`;
+  const description = product.description.slice(0, 150);
+  const image = product.images[0]
+    ? new URL(product.images[0].url, getPublicAppUrl()).toString()
+    : undefined;
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: image ? [{ url: image, alt: product.images[0].alt }] : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: image ? [image] : [],
+    },
+  };
+}
 
 export default async function ProductDetailPage({ params }: PageProps<"/products/[slug]">) {
   const { slug } = await params;
@@ -18,7 +47,7 @@ export default async function ProductDetailPage({ params }: PageProps<"/products
   const available = product.variants.some((variant) => variant.stock > 0);
 
   return (
-    <main className="content-width detail-page" id="main-content">
+    <main className="content-width detail-page" id="main-content" tabIndex={-1}>
       <nav className="breadcrumb" aria-label="현재 위치">
         <Link href="/products">SHOP</Link>
         <span>/</span>

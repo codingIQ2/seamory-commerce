@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { getPublicAppUrl } from "@/lib/site-url";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("http://localhost:3000"),
+  metadataBase: getPublicAppUrl(),
   title: {
     default: "HUKUPUKU — 오래 남는 패션 셀렉션",
     template: "%s | HUKUPUKU",
@@ -16,11 +17,17 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "HUKUPUKU — 오래 입는 패션 셀렉션",
+    description: "상품 탐색부터 테스트 주문까지 연결된 패션 커머스 포트폴리오",
+    images: ["/og-hukupuku.png"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="ko">
+    <html data-scroll-behavior="smooth" lang="ko">
       <body>{children}</body>
     </html>
   );

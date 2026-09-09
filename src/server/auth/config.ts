@@ -7,6 +7,7 @@ import { getDb } from "@/server/db/client";
 import { getAuthEnv } from "@/server/env";
 
 const authEnv = getAuthEnv();
+const authAttemptLimit = process.env.NODE_ENV === "production" ? 5 : 100;
 
 export const auth = betterAuth({
   appName: "HUKUPUKU",
@@ -17,6 +18,16 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
+    minPasswordLength: 10,
+  },
+  rateLimit: {
+    enabled: true,
+    window: 60,
+    max: 60,
+    customRules: {
+      "/sign-in/email": { window: 60, max: authAttemptLimit },
+      "/sign-up/email": { window: 60, max: authAttemptLimit },
+    },
   },
   user: {
     additionalFields: {

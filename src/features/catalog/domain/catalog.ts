@@ -9,7 +9,10 @@ export type CatalogFilters = {
   minPrice?: number;
   maxPrice?: number;
   sort: CatalogSort;
+  page: number;
 };
+
+export const catalogPageSize = 12;
 
 export function parseCatalogFilters(
   params: Record<string, string | string[] | undefined>,
@@ -32,5 +35,6 @@ export function parseCatalogFilters(
     sort: catalogSortValues.includes(sortValue as CatalogSort)
       ? (sortValue as CatalogSort)
       : "newest",
+    page: Math.min(Math.max(number(params.page) ?? 1, 1), 1_000),
   };
 }

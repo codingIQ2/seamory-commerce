@@ -26,7 +26,7 @@ export default async function CartPage() {
   );
 
   return (
-    <main className="content-width cart-page" id="main-content">
+    <main className="content-width cart-page" id="main-content" tabIndex={-1}>
       <header className="page-heading compact">
         <p className="eyebrow">Your selection</p>
         <h1>CART</h1>

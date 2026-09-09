@@ -7,8 +7,11 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const admin = await requireAdmin();
   return (
     <div className="admin-shell">
+      <a className="skip-link" href="#main-content">
+        관리자 본문으로 바로가기
+      </a>
       <AdminSidebar adminName={admin.name} />
-      <main className="admin-main" id="main-content">
+      <main className="admin-main" id="main-content" tabIndex={-1}>
         {children}
       </main>
     </div>

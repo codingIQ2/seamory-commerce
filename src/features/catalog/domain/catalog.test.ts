@@ -9,6 +9,7 @@ describe("parseCatalogFilters", () => {
       size: "M",
       minPrice: 10000,
       sort: "newest",
+      page: 1,
     });
   });
 
@@ -16,6 +17,13 @@ describe("parseCatalogFilters", () => {
     expect(parseCatalogFilters({ sort: "popular", maxPrice: "-1" })).toMatchObject({
       sort: "newest",
       maxPrice: undefined,
+      page: 1,
     });
+  });
+
+  it("accepts only a bounded positive page number", () => {
+    expect(parseCatalogFilters({ page: "3" }).page).toBe(3);
+    expect(parseCatalogFilters({ page: "0" }).page).toBe(1);
+    expect(parseCatalogFilters({ page: "99999" }).page).toBe(1000);
   });
 });

@@ -13,7 +13,7 @@ export default async function OrdersPage() {
   if (!session) redirect("/login?returnTo=%2Faccount%2Forders");
   const orders = await getOrdersByUser(session.user.id);
   return (
-    <main className="content-width orders-page" id="main-content">
+    <main className="content-width orders-page" id="main-content" tabIndex={-1}>
       <header className="page-heading compact">
         <p className="eyebrow">My account</p>
         <h1>ORDERS</h1>

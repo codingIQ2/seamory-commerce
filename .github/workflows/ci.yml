@@ -11,7 +11,8 @@ permissions:
 env:
   DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/hukupuku_ci?schema=public
   BETTER_AUTH_SECRET: hukupuku-ci-only-secret-at-least-32-characters
-  BETTER_AUTH_URL: http://127.0.0.1:3000
+  BETTER_AUTH_URL: http://localhost:3000
+  NEXT_PUBLIC_APP_URL: http://localhost:3000
   ADMIN_SEED_EMAIL: admin@hukupuku.test
   ADMIN_SEED_PASSWORD: Hukupuku-ci-only-2026
   ADMIN_SEED_NAME: HUKUPUKU CI Admin
@@ -33,6 +34,8 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Audit production dependencies
+        run: pnpm audit --prod --audit-level high
       - name: Validate and generate Prisma Client
         run: pnpm db:validate && pnpm db:generate
       - name: Check formatting

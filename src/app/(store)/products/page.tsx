@@ -12,10 +12,25 @@ type ProductsPageProps = {
 
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
   const filters = parseCatalogFilters(await searchParams);
-  const [products, options] = await Promise.all([getCatalogProducts(filters), getCatalogOptions()]);
+  const [catalog, options] = await Promise.all([getCatalogProducts(filters), getCatalogOptions()]);
+  const { products, total, page, pageCount } = catalog;
+
+  function pageHref(targetPage: number) {
+    const params = new URLSearchParams();
+    if (filters.query) params.set("q", filters.query);
+    if (filters.brand) params.set("brand", filters.brand);
+    if (filters.category) params.set("category", filters.category);
+    if (filters.size) params.set("size", filters.size);
+    if (filters.minPrice !== undefined) params.set("minPrice", String(filters.minPrice));
+    if (filters.maxPrice !== undefined) params.set("maxPrice", String(filters.maxPrice));
+    if (filters.sort !== "newest") params.set("sort", filters.sort);
+    if (targetPage > 1) params.set("page", String(targetPage));
+    const query = params.toString();
+    return query ? `/products?${query}` : "/products";
+  }
 
   return (
-    <main className="content-width catalog-page" id="main-content">
+    <main className="content-width catalog-page" id="main-content" tabIndex={-1}>
       <header className="page-heading">
         <p className="eyebrow">Selected goods / 2026</p>
         <h1>SHOP</h1>
@@ -97,7 +112,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
       </form>
 
       <div className="catalog-result-bar">
-        <strong>{products.length} PRODUCTS</strong>
+        <strong>{total} PRODUCTS</strong>
         <span>표시 가격은 부가세 포함 금액입니다.</span>
       </div>
 
@@ -117,6 +132,27 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
           </Link>
         </section>
       )}
+      {total > 0 && pageCount > 1 ? (
+        <nav aria-label="상품 목록 페이지" className="pagination">
+          {page > 1 ? (
+            <Link href={pageHref(page - 1)} rel="prev">
+              이전
+            </Link>
+          ) : (
+            <span aria-disabled="true">이전</span>
+          )}
+          <strong aria-current="page">
+            {page} / {pageCount}
+          </strong>
+          {page < pageCount ? (
+            <Link href={pageHref(page + 1)} rel="next">
+              다음
+            </Link>
+          ) : (
+            <span aria-disabled="true">다음</span>
+          )}
+        </nav>
+      ) : null}
     </main>
   );
 }
