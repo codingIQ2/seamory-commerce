@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",
-    "@playwright/test": "^1.62.1",
+    "@playwright/test": "^1.63.0",
     "@prisma/cli-dev": "^0.16.28",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
